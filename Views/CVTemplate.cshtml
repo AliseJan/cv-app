@@ -1,0 +1,99 @@
+﻿@model CVApp.Models.CV
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@Model.FirstName @Model.LastName's CV</title>
+    <style>
+        body {
+            font-family: 'Trebuchet MS', sans-serif;
+            font-size: 2em !important;
+            color: #333;
+            overflow: auto;
+            margin: 20px;
+        }
+
+        header {
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            color: #333366;            
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        h2 {
+            color: #555;
+            font-size: 1.25em !important;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        p {
+            margin: 15px 0;
+            font-size: 0.75em;
+        }
+
+        .contact-info {
+            font-style: italic;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        em {
+            color: #777;
+        }
+
+        .responsibilities {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>@Model.FirstName @Model.LastName</h1>
+        <div class="contact-info">
+            <p>Email: @Model.Email</p>
+            <p>Phone: @Model.MobileNumber</p>
+            <p>Address: @Model.Address.Street, @Model.Address.City, @Model.Address.PostalCode, @Model.Address.Country</p>
+        </div>
+    </header>
+
+    <div class="section">
+        <h2>Education</h2>
+        @foreach (var edu in Model.Education.OrderBy(e => e.EndDate == DateTime.MinValue).ThenByDescending(e => e.EndDate))
+        {
+            <p>
+                <strong>@edu.SchoolName, @edu.FacultyName</strong><br />
+                @edu.Degree, @edu.FieldOfStudy<br />
+                @edu.StartDate.ToString("dd.MM.yyyy")@((edu.EndDate == null) ? " - present" : " - " + edu.EndDate.Value.ToString("dd.MM.yyyy"))<br />
+                Status: @edu.StudyStatus
+            </p>
+        }
+    </div>
+
+    <div class="section">
+        <h2>Experience</h2>
+        @foreach (var exp in Model.Experience.OrderBy(e => e.EndDate == DateTime.MinValue).ThenByDescending(e => e.EndDate))
+        {
+            <p>
+                <strong>@exp.JobTitle</strong> at @exp.CompanyName<br />
+                @exp.StartDate.ToString("dd.MM.yyyy")@((exp.EndDate == null) ? " - present" : " - " + exp.EndDate.Value.ToString("dd.MM.yyyy")), @exp.Workload<br />
+                Responsibilities: <span class="responsibilities">@exp.Responsibilities</span><br />
+                <em>Skills: @string.Join(", ", exp.Skills.Select(s => s.Name))</em><br />
+                <em>Achievements: @string.Join(", ", exp.Achievements.Select(a => a.Name))</em>
+            </p>
+        }
+    </div>
+</body>
+</html>

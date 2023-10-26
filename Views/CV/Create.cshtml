@@ -1,0 +1,190 @@
+﻿@model CVApp.ViewModels.CreateCVViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+@section Scripts 
+{
+    <partial name="_CVFormTemplates" />
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<form method="post" id="input-form">
+    <div class="border p-3 mt-4">
+        <div class="row pb-4">
+            <h2 class="text-primary">Create CV</h2>
+            <hr />
+        </div>
+        <div class="text-danger">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        </div>
+        <div class="row pb-2">
+            <h3 class="text-secondary align-content-center">Basic Data</h3>
+        </div>
+        <div class="input-container">
+            <div class="column">
+                <div class="mb-3">
+                    <label asp-for="CV.FirstName">First Name</label>
+                    <input asp-for="CV.FirstName" class="form-control" required data-msg-required="Please enter your first name" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="CV.LastName">Last Name</label>
+                    <input asp-for="CV.LastName" class="form-control" required data-msg-required="Please enter your last name" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="CV.MobileNumber">Mobile Number</label>
+                    <input asp-for="CV.MobileNumber" class="form-control" required data-msg-required="Please enter your mobile number" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="CV.Email">Email</label>
+                    <input asp-for="CV.Email" type="email" class="form-control" required
+                           data-msg-required="Email is required"
+                           data-msg-email="Please enter a valid email address" />
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+            <div class="column">
+                <div class="mb-3">
+                    <label asp-for="CV.Address.Street">Street</label>
+                    <input asp-for="CV.Address.Street" class="form-control" required data-msg-required="Please enter your adress street" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="CV.Address.City">City</label>
+                    <input asp-for="CV.Address.City" class="form-control" required data-msg-required="Please enter your adress city" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="CV.Address.PostalCode">Postal Code</label>
+                    <input asp-for="CV.Address.PostalCode" class="form-control" required data-msg-required="Please enter your adress postal code" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="CV.Address.Country">Country</label>
+                    <input asp-for="CV.Address.Country" class="form-control" required data-msg-required="Please enter your adress country" />
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+        </div>     
+        <hr />
+        <div class="row pb-2">
+            <h3 class="text-secondary align-content-center">Education</h3>
+        </div>
+        <div id="school-section">
+            @for (int i = 0; i < Model.Schools.Count; i++)
+            {
+                <div class="school-entry">
+                    <div class="mb-3">
+                        <label asp-for="Schools[i].SchoolName">School Name</label>
+                        <input asp-for="Schools[i].SchoolName" class="form-control"/>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Schools[i].FacultyName">Faculty Name</label>
+                        <input asp-for="Schools[i].FacultyName" class="form-control"/>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Schools[i].Degree">Degree</label>
+                        <input asp-for="Schools[i].Degree" class="form-control"/>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Schools[i].FieldOfStudy">Field of Study</label>
+                        <input asp-for="Schools[i].FieldOfStudy" class="form-control"/>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Schools[i].StartDate">Start Date</label>
+                        <input asp-for="Schools[i].StartDate" type="date" class="form-control"/>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Schools[i].EndDate">End Date</label>
+                        <input asp-for="Schools[i].EndDate" type="date" class="form-control"/>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Schools[i].StudyStatus">Study Status</label>
+                        <input asp-for="Schools[i].StudyStatus" class="form-control"/>
+                    </div>
+                </div>
+            }
+            <button type="button" style="width: 250px;" class="btn btn-outline-success mb-3 add-school-button">
+                <span class="d-flex align-items-center">
+                    <i class="bi bi-plus-circle" style="font-size: 24px;"></i>
+                    <span class="ms-2">Add School</span>
+                </span>
+            </button>
+            <button type="button" style="width: 250px;" class="btn btn-outline-danger mb-3 remove-school-button">
+                <span class="d-flex align-items-center">
+                    <i class="bi bi-trash3" style="font-size: 24px;"></i>
+                    <span class="ms-2">Remove School</span>
+                </span>
+            </button>
+        </div>
+        <hr />
+        <div class="row pb-2">
+            <h3 class="text-secondary align-content-center">Experience</h3>
+        </div>
+        <div id="job-section">
+            @for (int i = 0; i < Model.Jobs.Count; i++)
+            {
+                <div class="job-entry" data-index="0">
+                    <div class="mb-3">
+                        <label asp-for="Jobs[i].CompanyName">Company Name</label>
+                        <input asp-for="Jobs[i].CompanyName" class="form-control"/>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Jobs[i].JobTitle">Job Title</label>
+                        <input asp-for="Jobs[i].JobTitle" class="form-control"/>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Jobs[i].Responsibilities">Responsibilities</label>
+                        <input asp-for="Jobs[i].Responsibilities" class="form-control"/>
+                    </div>
+                    <div class="mb-3">
+                        @for (int j = 0; j < Model.Jobs[i].Skills.Count; j++)
+                        {
+                            <input asp-for="Jobs[i].Skills[j].Name" class="form-control"/>
+                        }
+                    </div>
+                    <div class="mb-3">
+                        @for (int j = 0; j < Model.Jobs[i].Achievements.Count; j++)
+                        {
+                            <input asp-for="Jobs[i].Achievements[j].Name" class="form-control"/>
+                        }
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Jobs[i].Workload">Workload</label>
+                        <input asp-for="Jobs[i].Workload" class="form-control"/>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Jobs[i].StartDate">Start Date</label>
+                        <input asp-for="Jobs[i].StartDate" type="date" class="form-control"/>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Jobs[i].EndDate">End Date</label>
+                        <input asp-for="Jobs[i].EndDate" type="date" class="form-control" />
+                    </div>
+                </div>
+            }
+            <button type="button" style="width: 250px;" class="btn btn-outline-success mb-3 add-job-button">
+                <span class="d-flex align-items-center">
+                    <i class="bi bi-plus-circle" style="font-size: 24px;"></i>
+                    <span class="ms-2">Add Job</span>
+                </span>
+            </button>
+            <button type="button" style="width: 250px;" class="btn btn-outline-danger mb-3 remove-job-button">
+                <span class="d-flex align-items-center">
+                    <i class="bi bi-trash3" style="font-size: 24px;"></i>
+                    <span class="ms-2">Remove Job</span>
+                </span>
+            </button>
+        </div>
+        <hr /><br />
+        <div class="position-center" style="display:flex; justify-content:center;align-items:center;gap:20px">
+            <button type="submit" class="btn btn-outline-success btn-lg" style="width: 250px">Create</button>
+            <a asp-controller="CV" asp-action="Index" class="btn btn-outline-dark btn-lg" style="width: 250px">
+                Cancel
+            </a>
+        </div>
+    </div>
+</form>

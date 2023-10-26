@@ -1,0 +1,78 @@
+﻿@model IEnumerable<CV>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container-fluid">
+    <div class="row align-items-center">
+        <div class="col-6 p-4 pb-3">
+            <h2 class="text-primary">CV List</h2>
+        </div>
+        <div class="col-6 p-4 pb-3 text-end">
+            <a asp-controller="CV" asp-action="Create" class="btn btn-outline-success" style="width:39%">
+                <span class="d-flex align-items-center">
+                    <i class="bi bi-plus-circle" style="font-size: 24px;"></i>
+                    <span class="ms-2">Add new CV</span>
+                </span>
+            </a>
+        </div>
+    </div>
+    <br />
+    <div class="container-fluid">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover" style="width:100%">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Mobile Number</th>
+                        <th>Date Created</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var obj in Model)
+                    {
+                        <tr class="table-secondary" style="font-size: 14px">
+                            <td width="5%">@obj.CVId</td>
+                            <td width="15%">@obj.FirstName</td>
+                            <td width="15%">@obj.LastName</td>
+                            <td width="15%">@obj.Email</td>
+                            <td width="15%">@obj.MobileNumber</td>
+                            <td width="15%">@obj.CreatedDateTime.ToString("dd.MM.yyyy")</td>
+                            <td class="text-center">
+                                <div class="btn-group mx-auto" role="group">
+                                    <a asp-controller="CV" asp-action="PreviewPdf" asp-route-id="@obj.CVId"
+                                       class="btn btn-sm btn-success mx-1"><i class="bi bi-eye" style="font-size: 15px;"></i></a>
+                                    <a asp-controller="CV" asp-action="Edit" asp-route-id="@obj.CVId"
+                                       class="btn btn-sm btn-success mx-1"><i class="bi bi-pencil-square" style="font-size: 15px;"></i></a>
+                                    <a asp-controller="CV" asp-action="Delete" asp-route-id="@obj.CVId"
+                                       class="btn btn-sm btn-success mx-1"><i class="bi bi-trash3" style="font-size: 15px;"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div><br>
+    </div>
+    <div class="d-flex justify-content-center">
+        <ul class="pagination pagination-lg">
+            @if (ViewBag.TotalPages > 1)
+            {
+                <li class="page-item"><a class="page-link" href="@Url.Action("Index", new { page = 1 })">&laquo;</a></li>
+
+                for (var p = 1; p <= ViewBag.TotalPages; p++)
+                {
+                    <li class="page-item @(p == ViewBag.CurrentPage ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", new { page = p })">@p</a>
+                    </li>
+                }
+
+                <li class="page-item"><a class="page-link" href="@Url.Action("Index", new { page = ViewBag.TotalPages })">&raquo;</a></li>
+            }
+        </ul>
+    </div>
+</div>

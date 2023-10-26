@@ -1,0 +1,34 @@
+﻿@model int?
+@{
+    ViewData["Title"] = "CV Preview";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Preview PDF</title>
+    <style>
+        .pdf-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="mb-3">CV Preview</h1>
+    <div class="pdf-container">
+        <embed src="@Url.Action("GeneratePdf", new { id = Model })" type="application/pdf" width="500px" height="600px" />
+    </div>
+    <div class="position-center" style="display:flex; justify-content:center; align-items:center; gap:20px">
+        <a href="@Url.Action("GeneratePdf", new { id = Model })" download="CV.pdf" class="btn btn-outline-success btn-lg" style="width: 250px">
+            Download CV
+        </a>        
+        <a asp-controller="CV" asp-action="Index" class="btn btn-outline-dark btn-lg" style="width: 250px">
+            Back to list
+        </a>
+    </div>
+</body>
+</html>

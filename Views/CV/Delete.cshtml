@@ -1,0 +1,154 @@
+﻿@model CVApp.ViewModels.CreateCVViewModel
+@{
+    ViewData["Title"] = "Delete CV";
+}
+
+<form method="post" asp-action="Delete">
+    <input type="hidden" asp-for="CV.CVId" />
+    <div class="border p-3 mt-4">
+        <div class="row pb-4">
+            <h2 class="text-primary">Delete CV</h2>
+            <hr />
+        </div>
+        <div class="row pb-2">
+            <h3 class="text-secondary align-content-center">Basic Data</h3>
+        </div>
+        <div class="input-container">
+            <div class="column">
+                <div class="mb-3">
+                    <label asp-for="CV.FirstName">First Name</label>
+                    <input asp-for="CV.FirstName" disabled class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="CV.LastName">Last Name</label>
+                    <input asp-for="CV.LastName" disabled class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="CV.MobileNumber">Mobile Number</label>
+                    <input asp-for="CV.MobileNumber" disabled class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="CV.Email">Email</label>
+                    <input asp-for="CV.Email" disabled type="email" class="form-control" />
+                </div>
+            </div>
+            <div class="column">
+                <div class="mb-3">
+                    <label asp-for="CV.Address.Street">Street</label>
+                    <input asp-for="CV.Address.Street" disabled class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="CV.Address.City">City</label>
+                    <input asp-for="CV.Address.City" disabled class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="CV.Address.PostalCode">Postal Code</label>
+                    <input asp-for="CV.Address.PostalCode" disabled class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="CV.Address.Country">Country</label>
+                    <input asp-for="CV.Address.Country" disabled class="form-control" />
+                </div>
+            </div>
+        </div>     
+        <hr />
+        <div class="row pb-2">
+            <h3 class="text-secondary align-content-center">Education</h3>
+        </div>
+        <div id="school-section">
+            @for (int i = 0; i < Model.Schools.Count; i++)
+            {
+                <div class="school-entry">
+                    <div class="mb-3">
+                        <label asp-for="Schools[i].SchoolName">School Name</label>
+                        <input asp-for="Schools[i].SchoolName" disabled class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Schools[i].FacultyName">Faculty Name</label>
+                        <input asp-for="Schools[i].FacultyName" disabled class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Schools[i].Degree">Degree</label>
+                        <input asp-for="Schools[i].Degree" disabled class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Schools[i].FieldOfStudy">Field of Study</label>
+                        <input asp-for="Schools[i].FieldOfStudy" disabled class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Schools[i].StartDate">Start Date</label>
+                        <input asp-for="Schools[i].StartDate" disabled type="date" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Schools[i].EndDate">End Date</label>
+                        <input asp-for="Schools[i].EndDate" disabled type="date" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Schools[i].StudyStatus">Study Status</label>
+                        <input asp-for="Schools[i].StudyStatus" disabled class="form-control" />
+                    </div>
+                </div>
+            }
+        </div>
+        <hr />
+        <div class="row pb-2">
+            <h3 class="text-secondary align-content-center">Experience</h3>
+        </div>
+        <div id="job-section">
+            @for (int i = 0; i < Model.Jobs.Count; i++)
+            {
+                <div class="job-entry" data-index="0">
+                    <div class="mb-3">
+                        <label asp-for="Jobs[i].CompanyName">Company Name</label>
+                        <input asp-for="Jobs[i].CompanyName" disabled class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Jobs[i].JobTitle">Job Title</label>
+                        <input asp-for="Jobs[i].JobTitle" disabled class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Jobs[i].Responsibilities">Responsibilities</label>
+                        <input asp-for="Jobs[i].Responsibilities" disabled class="form-control" />
+                    </div>
+                    <div class="skills-container mb-3">
+                        @for (int j = 0; j < Model.Jobs[i].Skills.Count; j++)
+                        {
+                            <div>
+                                <label asp-for="Jobs[i].Skills[j].Name">Skill</label>
+                                <input asp-for="Jobs[i].Skills[j].Name" disabled class="form-control" />
+                            </div>
+                        }
+                    </div>
+                    <div class="mb-3">
+                        @for (int j = 0; j < Model.Jobs[i].Achievements.Count; j++)
+                        {
+                            <div>
+                                <label asp-for="Jobs[i].Achievements[j].Name">Achievement</label>
+                                <input asp-for="Jobs[i].Achievements[j].Name" disabled class="form-control" />
+                            </div>
+                        }
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Jobs[i].Workload">Workload</label>
+                        <input asp-for="Jobs[i].Workload" disabled class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Jobs[i].StartDate">Start Date</label>
+                        <input asp-for="Jobs[i].StartDate" disabled type="date" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Jobs[i].EndDate">End Date</label>
+                        <input asp-for="Jobs[i].EndDate" disabled type="date" class="form-control" />
+                    </div>
+                </div>
+            }
+        </div>
+        <hr /><br />
+        <div class="position-center" style="display:flex; justify-content:center;align-items:center;gap:20px">
+            <button type="submit" class="btn btn-outline-danger btn-lg" style="width: 250px">Delete CV</button>
+            <a asp-controller="CV" asp-action="Index" class="btn btn-outline-dark btn-lg" style="width: 250px">
+                Cancel
+            </a>
+        </div>
+    </div>
+</form>

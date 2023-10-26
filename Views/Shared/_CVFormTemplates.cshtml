@@ -1,0 +1,111 @@
+﻿<script id="school-template" type="text/html">
+    <div class="school-entry">
+        <div class="mb-3">
+            <label>School Name</label>
+            <input class="form-control" name="Schools[i].SchoolName" required data-msg-required="Please enter school name"/>
+        </div>
+        <div class="mb-3">
+            <label>Faculty Name</label>
+            <input class="form-control" name="Schools[i].FacultyName" required data-msg-required="Please enter faculty name"/>
+        </div>
+        <div class="mb-3">
+            <label>Degree</label>
+            <input class="form-control" name="Schools[i].Degree" required data-msg-required="Please enter degree"/>
+        </div>
+        <div class="mb-3">
+            <label>Field of Study</label>
+            <input class="form-control" name="Schools[i].FieldOfStudy" required data-msg-required="Please enter field of study"/>
+        </div>
+        <div class="mb-3">
+            <label>Start Date</label>
+            <input type="date" class="form-control" name="Schools[i].StartDate" required data-msg-required="Please enter start date"/>
+        </div>
+        <div class="mb-3">
+            <label>End Date</label>
+            <input type="date" class="form-control" name="Schools[i].EndDate"/>
+        </div>
+        <div class="mb-3">
+            <label>Study Status</label>
+            <input class="form-control" name="Schools[i].StudyStatus" required data-msg-required="Please enter study status"/>
+        </div>
+    </div>
+</script>
+
+<script id="job-template" type="text/html">
+    <div class="job-entry" data-index="0">
+        <div class="mb-3">
+            <label>Company Name</label>
+            <input class="form-control" name="Jobs[i].CompanyName" required data-msg-required="Please enter company name"/>
+        </div>
+        <div class="mb-3">
+            <label>Job Title</label>
+            <input class="form-control" name="Jobs[i].JobTitle" required data-msg-required="Please enter job title"/>
+        </div>
+        <div class="mb-3">
+            <label>Responsibilities</label>
+            <input class="form-control" name="Jobs[i].Responsibilities" required data-msg-required="Please enter responsibilities"/>
+        </div>
+        <div class="skills-container mb-3">
+            <div class="mb-3">
+                <label>Skill</label>
+                <input class="form-control" name="Jobs[i].Skills[0].Name" required data-msg-required="Please enter skill">
+            </div>
+            <button type="button" style="width: 250px;" class="btn btn-outline-success add-skill-button">
+                <span class="d-flex align-items-center">
+                     <i class="bi bi-plus-circle" style="font-size: 18px;"></i>
+                     <span class="ms-2">Add Skill</span>
+                </span>
+            </button>
+            <button type="button" style="width: 250px;" class="btn btn-outline-danger remove-skill-button">
+                <span class="d-flex align-items-center">
+                     <i class="bi bi-trash3" style="font-size: 18px;"></i>
+                     <span class="ms-2">Remove Skill</span>
+                </span>
+            </button>
+        </div>
+        <div class="achievements-container mb-3">
+            <div class="mb-3">
+                <label>Achievement</label>
+                <input class="form-control" name="Jobs[i].Achievements[0].Name" required data-msg-required="Please enter achievement"/>
+            </div>
+            <button type="button" style="width: 250px;" class="btn btn-outline-success add-achievement-button">
+                <span class="d-flex align-items-center">
+                    <i class="bi bi-plus-circle" style="font-size: 18px;"></i>
+                    <span class="ms-2">Add Achievement</span>
+                </span>
+            </button>
+            <button type="button" style="width: 250px;" class="btn btn-outline-danger remove-achievement-button">
+                <span class="d-flex align-items-center">
+                    <i class="bi bi-trash3" style="font-size: 18px;"></i>
+                    <span class="ms-2">Remove Achievement</span>
+                </span>
+            </button>
+        </div>
+        <div class="mb-3">
+            <label>Workload</label>
+            <input class="form-control" name="Jobs[i].Workload" required data-msg-required="Please enter workload"/>
+        </div>
+        <div class="mb-3">
+            <label>Start Date</label>
+            <input type="date" class="form-control" name="Jobs[i].StartDate" required data-msg-required="Please enter start date"/>
+        </div>
+        <div class="mb-3">
+            <label>End Date</label>
+            <input type="date" class="form-control" name="Jobs[i].EndDate"/>
+        </div>
+    </div>
+</script>
+
+<script id="skill-template" type="text/html">
+    <div class="mb-3">
+        <label>Skill</label>
+        <input class="form-control" name="Jobs[i].Skills[j].Name" required data-msg-required="Please enter skill"/>
+    </div>
+</script>
+
+<script id="achievement-template" type="text/html">
+    <div class="mb-3">
+        <label>Achievement</label>
+        <input class="form-control" name="Jobs[i].Achievements[j].Name" required data-msg-required="Please enter achievement"/>
+    </div>
+</script>
